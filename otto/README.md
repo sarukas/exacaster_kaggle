@@ -7,11 +7,11 @@ OTTO chalenge
 
 Reikia pasiruošti kokybišką template kurį galėsime naudoti tolesniam modeliavimui. Reikalavimai (bus papildyta):
 
-*. Tvarkingas ```test.csv``` ir ```train.csv``` skaitymas
-*. Vidinis train ir test split su keičiamais parametrais ir galimybe praleisti
-*. Modeliavimo blokas
-*. Logloss estimator
-*. Tvarkingas rašymas į ```submission.csv```
+* Tvarkingas ```test.csv``` ir ```train.csv``` skaitymas
+* Vidinis train ir test split su keičiamais parametrais ir galimybe praleisti
+* Modeliavimo blokas
+* Logloss estimator
+* Tvarkingas rašymas į ```submission.csv```
 
 Pabandžiau greitai sumesti į ```template.R```, tačiau kol kas nesutvarkiau logloess. Pabaigsiu iki kito mūsų susitikimo.
 
