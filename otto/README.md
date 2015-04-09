@@ -13,7 +13,7 @@ Reikia pasiruošti kokybišką template kurį galėsime naudoti tolesniam modeli
 * Logloss estimator
 * Tvarkingas rašymas į `submission.csv`
 
-Pabandžiau greitai sumesti į `template.R`. Yra vienas svarbus pastebėjimas - šiuo metu padaryta classification algoritmams. Regresijos algoritmo naudojimo pavyzdys 'h2o.R' vėliau galės būti perdarytas į *template*. Reiktų jį ir komentarais papildyti.
+Pabandžiau greitai sumesti į `template.R`. Yra vienas svarbus pastebėjimas - šiuo metu padaryta classification algoritmams. Regresijos algoritmo naudojimo pavyzdys `h2o.R` vėliau galės būti perdarytas į *template*. Reiktų jį ir komentarais papildyti.
 
 **Svarbu:** modeliai su tiek kintamųjų labai daug sveria, taigi bandykite atsargiai.
 
@@ -21,4 +21,4 @@ Pabandžiau greitai sumesti į `template.R`. Yra vienas svarbus pastebėjimas - 
 
 Kaggle *uploads* rezultatai:
 
-1. Bandymas su 'h2o.R'. Realiai tikslas buvo tik užmesti akį ar viskas veikia. *Score: 0.57369*.
+1. Bandymas su `h2o.R`. Realiai tikslas buvo tik užmesti akį ar viskas veikia. *Score: 0.57369*.
