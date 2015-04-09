@@ -32,13 +32,13 @@ local_test = train[-index,]
 #              Modeliavimo dalis                #
 #################################################
 
-# testui naudosimės rpart: Recursive Partitioning and Regression Trees
+# testui naudosimės random forest
 
 # caret reikia atskirtų target ir features, taigi atskiriame:
 target <- local_train[, target]
 features <- local_train[, 2:94, with = FALSE] # išmetame id
 
-model <- train(features, target, method = "rpart")
+model <- train(features, target, method = "rf")
 
 prediction <- predict(model, local_test)
 
@@ -46,21 +46,38 @@ prediction <- predict(model, local_test)
 #            Paklaidos vertinimas               #
 #################################################
 
-# Reikia įsitikinti, kad veikia taip kaip reikia!
-LogLoss <- function(act, pred) {
-  -sum(act*log(pred))/(n - m)
+# Funkcija paimta iš Kaggle: https://www.kaggle.com/wiki/LogarithmicLoss
+MultiLogLoss <- function(act, pred)
+{
+  eps = 1e-15;
+  nr <- nrow(pred)
+  pred = matrix(sapply( pred, function(x) max(eps,x)), nrow = nr)      
+  pred = matrix(sapply( pred, function(x) min(1-eps,x)), nrow = nr)
+  ll = sum(act*log(pred) )
+  ll = ll * -1/(nrow(act))      
+  return(ll);
 }
 
-# Blogai, reikia konvertuoti į matricinį pavidalą!
-LogLoss(as.numeric(local_test[, target]), as.numeric(prediction))
+# Konvertuojame į matricinius pavidalus
+# Svarbu, čia model.matrix yra funkcija, ji nesusijusi su model! ;)
+prediction_matrix <- model.matrix(~ 0+prediction)
+actual_matrix <- model.matrix(~ 0+local_test[,target])
+
+MultiLogLoss(prediction_matrix, actual_matrix)
 
 #################################################
 #            Rezultatų pateikimas               #
 #################################################
 
-# Class 1 missing
-index <- test[, id]
-results <- data.table(id = index, predict = predict(model, test))
-results <- data.table(model.matrix(~ id + predict, results))
+# Pritaikome modelį test rezultatams
+results <- predict(model, test)
+
+# Paverčiame matriciniu pavidalu ir sutvarkome
+results <- data.table(model.matrix(~ 0 + results))
+setnames(results, c("Class_1", "Class_2", "Class_3", "Class_4", "Class_5", "Class_6", "Class_7", "Class_8", "Class_9"))
+results[, id := 1:dim(test)[1]]
+setcolorder(results, c("id", "Class_1", "Class_2", "Class_3", "Class_4", "Class_5", "Class_6", "Class_7", "Class_8", "Class_9"))
+
+# Surašome resultatus į failą
 write.table(results, file = "submission.csv", sep = ",", quote = FALSE, row.names = FALSE)
 
