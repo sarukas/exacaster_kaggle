@@ -40,8 +40,6 @@ features <- local_train[, 2:94, with = FALSE] # išmetame id
 
 model <- train(features, target, method = "rf")
 
-prediction <- predict(model, local_test)
-
 #################################################
 #            Paklaidos vertinimas               #
 #################################################
@@ -60,10 +58,19 @@ MultiLogLoss <- function(act, pred)
 
 # Konvertuojame į matricinius pavidalus
 # Svarbu, čia model.matrix yra funkcija, ji nesusijusi su model! ;)
-prediction_matrix <- model.matrix(~ 0+prediction)
-actual_matrix <- model.matrix(~ 0+local_test[,target])
 
+# local_train resultatas
+prediction <- predict(model, local_train)
+prediction_matrix <- model.matrix(~ 0+prediction)
+actual_matrix <- model.matrix(~ 0+target, local_train)
 MultiLogLoss(prediction_matrix, actual_matrix)
+
+# local_test resultatas
+prediction <- predict(model, local_test)
+prediction_matrix <- model.matrix(~ 0+prediction)
+actual_matrix <- model.matrix(~ 0+target, local_test)
+MultiLogLoss(prediction_matrix, actual_matrix)
+
 
 #################################################
 #            Rezultatų pateikimas               #
