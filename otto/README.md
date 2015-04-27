@@ -28,7 +28,7 @@ feat_1,feat_2,feat_3, feat_5,feat_8,feat_11,feat_12,feat_14,feat_19,feat_20,feat
 Bandymai su h2o deeplearning panaudojant minėtus stulpus (žr. `h2o.R`):
 
 | | local_train | local_test |
-|-|-|-|
+| --- | --- | --- |
 | Be atrankos | 0.4106741 | 0.6157583 |
 | Su atranka | 1.020813 | 1.078613 |
 
