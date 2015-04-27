@@ -41,6 +41,18 @@ model <- h2o.SpeeDRF(x=2:94, y=95, data = local_train.hex, nfolds = 10, classifi
 model <- h2o.randomForest(x=2:94, y=95, data = local_train.hex, depth = 25, nfolds = 10, classification = TRUE, seed = 42)
 
 ################################
+#        Po atrankos           #
+################################
+
+model <- h2o.deeplearning(x=c(2,3,4,6,9,12,13,15,20,21,23,25,26,28,61,63,71,79)
+                          , y=95, data = local_train.hex, classification = TRUE
+                          , nfolds = 10, override_with_best_model = TRUE, seed = 42)
+
+#                         local_train   local_test
+# Be atrankos turėjome:   0.410674      0.6157583
+#                Dabar:   1.020813      1.078613
+
+################################
 #         Rezultatai           #
 ################################
 

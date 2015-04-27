@@ -17,6 +17,23 @@ Pabandžiau greitai sumesti į `template.R`. Yra vienas svarbus pastebėjimas - 
 
 **Svarbu:** modeliai su tiek kintamųjų labai daug sveria, taigi bandykite atsargiai.
 
+## Feature atranka
+
+Šiuo metu dirbame su šiais:
+
+```
+feat_1,feat_2,feat_3, feat_5,feat_8,feat_11,feat_12,feat_14,feat_19,feat_20,feat_22,feat_24,feat_25,feat_27,feat_60,feat_62,feat_70,feat_78
+```
+
+Bandymai su h2o deeplearning panaudojant minėtus stulpus (žr. `h2o.R`):
+
+| | local_train | local_test |
+|-|-|-|
+| Be atrankos | 0.4106741 | 0.6157583 |
+| Su atranka | 1.020813 | 1.078613 |
+
+Iš pirmo žvilgsnio panašu jog atranka stirpiai per grubi...
+
 ## Rezultatai
 
 `h2o.R` išbandyti modeliai (be optimizavimo):
